@@ -1,0 +1,12 @@
+Inventory:
+  type: object
+  properties:
+    itemId:
+      type: string
+      example: "aaAA001"
+    name:
+      type: string
+      example: "風土記"
+    stock:
+      type: integer
+      example: 5

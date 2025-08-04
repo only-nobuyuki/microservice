@@ -1,0 +1,38 @@
+services:
+  # user-service:
+  #   build:
+  #     context: ./user-service
+  #   container_name: user-service
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     SPRING_PROFILES_ACTIVE: docker
+  #   networks:
+  #     - microservice-net
+  # order-service:
+  #   build:
+  #     context: ./order-service
+  #   container_name: order-service
+  #   ports:
+  #     - "8081:8080"
+  #   networks:
+  #     - microservice-net
+  inventory-service:
+    build:
+      context: ./inventory-service
+    container_name: inventory-service
+    ports:
+      - "8082:8080"
+    networks:
+      - microservice-net
+  # swagger-ui:
+  #   image: swaggerapi/swagger-ui
+  #   ports:
+  #     - "8085:8080"
+  #   volumes:
+  #     - ./api-spec.yaml:/usr/share/nginx/html/swagger.yaml
+  #   environment:
+  #     SWAGGER_JSON: /swagger.yaml
+networks:
+  microservice-net:
+    driver: bridge

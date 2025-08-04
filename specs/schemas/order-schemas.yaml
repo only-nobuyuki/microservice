@@ -1,0 +1,23 @@
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        itemId: 
+          type: string
+          example: "aaAA001"
+        orderQuantity:
+          type: integer
+          example: 5
+    OrderResult:
+      type: object
+      properties:
+        orderNo:
+          type: integer
+          example: 000001
+        item:
+          type: array
+          $ref: '#/components/schemas/Order'

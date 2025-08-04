@@ -1,0 +1,56 @@
+openapi: 3.0.x
+info:
+  title: User Service API
+  version: 1.0.0
+  description: ユーザー情報の登録、一括取得、IDを指定した取得を行う。
+servers:
+  - url: http://user-service:8080
+    description: 開発中 urlの設計は見直しが必要
+paths:
+  /users:
+    get:
+      summary: 全ユーザー取得
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: ユーザー一覧の取得に成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './schemas/user-schemas.yaml#/components/schemas/User'
+    post:
+      summary: 新規ユーザー登録
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/user-schemas.yaml#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: 新規ユーザーの登録に成功
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/user-schemas.yaml#/#/components/schemas/User'
+  /users/{id}:
+    get:
+      summary: 任意のIDのユーザー取得
+      operationId: getUserByUserId
+      parameters:
+        - description: ユーザーID
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ユーザー情報の取得に成功
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/user-schemas.yaml#/#/components/schemas/User'

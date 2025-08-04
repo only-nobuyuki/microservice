@@ -1,0 +1,9 @@
+Error:
+  type: object
+  properties:
+    summary:
+      type: string
+      example: "パラメータ不正"
+    details:
+      type: string
+      example: "数字を指定するかしょに文字列が設定されています。"

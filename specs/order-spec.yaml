@@ -1,0 +1,55 @@
+openapi: 3.0.x
+info:
+  title: Order Service API
+  version: 1.0.0
+  description: 商品の注文、注文履歴の一括取得、注文管理番号を指定した注文履歴の取得を行う。
+servers:
+  - url: http://inventory-service:8083
+    description: 開発中 microservice内で使用される。
+paths:
+  /orders:
+    get:
+      summary: 注文履歴の一括取得
+      operationId: getAllOrders
+      responses:
+        '200':
+          description: 注文履歴一覧の取得に成功
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: './schemas/order-schemas.yaml#/components/schemas/OrderResult'
+    post:
+      summary: 商品の注文
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/order-schemas.yaml#/components/schemas/Order'
+      responses:
+        '201':
+          description: 商品の注文に成功
+          content:
+            application/json:
+              schema: 
+                $ref: './schemas/order-schemas.yaml#/components/schemas/OrderResult'
+  /orders/{orderId}:
+    get:
+      summary: 任意の注文管理番号の注文履歴取得
+      operationId: getOrderByOrderId
+      parameters:
+        - description: 注文管理番号
+          name: orderNo
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 注文履歴の取得に成功
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/order-schemas.yaml#/components/schemas/OrderResult'       

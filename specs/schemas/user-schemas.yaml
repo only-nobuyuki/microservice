@@ -1,0 +1,23 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "韓非子"
+        email:
+          type: string
+          example: "kanpi@example.com"
+    UserInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "韓非子"
+        email:
+          type: string
+          example: "kanpi@example.com"
