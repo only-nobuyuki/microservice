@@ -5,21 +5,36 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>
-      HelloServlet
-    </servlet-name>
+    <servlet-name>InventoryServlet</servlet-name>
     <!-- FQCN-->
-    <servlet-class>
-      com.example.inventory.HelloServlet
-    </servlet-class>
+    <servlet-class>com.example.inventory.web.InventoryServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>
-      HelloServlet
-    </servlet-name>
+    <!-- <servlet>配下の<servlet-name>と同じにする-->
+    <servlet-name>InventoryServlet</servlet-name>
     <!-- ワイルドカード可能-->
-    <url-pattern>
-      /hello
-    </url-pattern>
+    <url-pattern>/inventories</url-pattern>
   </servlet-mapping>
+
+  <!-- リクエストとレスポンスに適用される-->
+  <filter>
+    <!-- 通常は文字化けを防ぎ安全に処理するためだが、今回はシステムから受け取る想定なので-->
+    <!-- 今回はシステムから受け取る想定であり、リクエストの完全に構成する責任は渡す側にあるものとする-->
+    <!-- なので学習用として設定-->
+    <filter-name>EncodingFilter</filter-name>
+    <!-- Tomcatに内蔵されている-->
+    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
